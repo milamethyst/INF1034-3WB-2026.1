@@ -51,16 +51,16 @@ for _ in range(8):
     t.lt(45)
 t.end_fill()
 
-# Desenhando uma estrela
+# Desenhando um dodecaedro
 t.pu()
-t.goto(-x, x)
+t.goto(-x, x/2)
 t.pd()
-color = textinput("Obter cor", "Digite uma cor para a estrela")
+color = textinput("Obter cor", "Digite uma cor para o dodecaedro")
 t.color(color)
 t.begin_fill()
-for _ in range(6):
-    t.fd(150)
-    t.lt(144)
+for _ in range(12):
+    t.fd(50)
+    t.lt(30)
 t.end_fill()
 
 # Desenhando uma espiral
