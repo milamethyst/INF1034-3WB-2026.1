@@ -1,8 +1,7 @@
 from turtle import *
 
-t = Turtle()
-
-x = 300
+t = Turtle() # Instanciando tartaruga
+x = 300 # Valor padrão para coordenadas
 
 # Desenhando o plano cartesiano
 t.pu()
@@ -15,7 +14,6 @@ t.goto(-1000, 0)
 t.pd()
 t.rt(90)
 t.fd(2000)
-
 
 # Desenhando um triângulo
 t.pu()
@@ -74,6 +72,5 @@ t.color(color)
 for i in range(75):
     t.fd(i * 1.25)
     t.lt(30)
-
 
 mainloop()
