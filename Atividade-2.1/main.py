@@ -11,10 +11,10 @@ t.lt(90)
 t.fd(1000)
 t.stamp()
 t.pu()
-t.goto(-1000, 0)
+t.goto(-950, 0)
 t.pd()
 t.rt(90)
-t.fd(2000)
+t.fd(1900)
 t.stamp()
 
 # Desenhando um triângulo
