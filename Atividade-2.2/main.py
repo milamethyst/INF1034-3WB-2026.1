@@ -8,37 +8,58 @@ t.speed(0)
 def main():
     # Bandeiras fáceis
     # Holanda/Países Baixos
-    facil(-450, 300, 900, 200, '#ae1c28')
-    facil(-450, 100, 900, 200, '#ffffff')
-    facil(-450, -100, 900, 200, '#21468b')
+    retangulo(-450, 300, 900, 200, '#ae1c28')
+    retangulo(-450, 100, 900, 200, '#ffffff')
+    retangulo(-450, -100, 900, 200, '#21468b')
     base()
 
     # Itália
-    facil(-450, 300, 300, 600, '#009246')
-    facil(-150, 300, 300, 600, '#ffffff')
-    facil(150, 300, 300, 600, '#ce2b37')
+    retangulo(-450, 300, 300, 600, '#009246')
+    retangulo(-150, 300, 300, 600, '#ffffff')
+    retangulo(150, 300, 300, 600, '#ce2b37')
     base()
 
     # Bandeiras médias
-    # Gana (FAZER ESTRELA!!!!)
-    facil(-450, 300, 900, 200, '#ce1126')
-    facil(-450, 100, 900, 200, '#fcd116')
-    facil(-450, -100, 900, 200, '#006b3f')
-    """
-    t.pu()
-    t.goto(0, 100)
-    t.color('black')
-    t.begin_fill()
-    for side in range(5):
-        t.fd(200)
-        t.rt(120)
-        t.fd(200)
-        t.rt(72 - 120)
-    t.end_fill()
+    # Gana
+    retangulo(-450, 300, 900, 200, '#ce1126')
+    retangulo(-450, 100, 900, 200, '#fcd116')
+    retangulo(-450, -100, 900, 200, '#006b3f')
+    estrela(-100, 25, 75, 'black')
     base()
-    """
+
+    # Cuba
+    for i in range(5):
+        if (i % 2 == 0):
+            color = '#002a8f'
+        else:
+            color = '#ffffff'
+        retangulo(-450, 300-(i*120), 900, 120, color)
+    t.pu()
+    t.goto(-450, 300)
+    t.pd()
+    t.color('#cb1515')
+    t.begin_fill()
+    t.rt(30)
+    t.fd(600)
+    t.rt(120)
+    t.fd(600)
+    t.rt(120)
+    t.fd(600)
+    t.end_fill()
+    t.setheading(0)
+    estrela(-350, 25, 75, '#ffffff')
+    base()
 
     # Bandeiras difíceis
+    # República Centro-Africana
+    retangulo(-450, 300, 900, 150, '#003082')
+    retangulo(-450, 150, 900, 150, '#ffffff')
+    retangulo(-450, 0, 900, 150, '#289728')
+    retangulo(-450, -150, 900, 150, '#ffce00')
+    retangulo(-75, 300, 150, 600, '#d21034')
+    estrela(-350, 240, 50, '#ffce00')
+    base()
+
     # Geórgia
     t.pu()
     t.goto(-65, 300)
@@ -59,16 +80,45 @@ def main():
         t.fd(235)
         t.rt(90)
     t.end_fill()
+    cruz(-278, 244, 41)
+    cruz(237, 244, 41)
+    cruz(-278, -121, 41)
+    cruz(237, -121, 41)
+    base()
 
-    cruz(-278, 244)
-    cruz(237, 244)
-    cruz(-278, -121)
-    cruz(237, -121)
-
+    # Grécia
+    for i in range(8):
+        if (i % 2 == 0):
+            color = '#0d5eaf'
+        else:
+            color = '#ffffff'
+        retangulo(-450, 300-(i*66), 900, 66, color)
+    color = '#0d5eaf'
+    retangulo(-450, -228, 900, 72, color)
+    retangulo(-450, 300, 320, 320, color)
+    t.color('#ffffff')
+    t.pu()
+    t.goto(-323, 300)
+    t.pd()
+    t.begin_fill()
+    for _ in range(2):
+        t.fd(66)
+        t.rt(90)
+        t.fd(132)
+        t.lt(90)
+        t.fd(127)
+        t.rt(90)
+        t.fd(66)
+        t.rt(90)
+        t.fd(127)
+        t.lt(90)
+        t.fd(132)
+        t.rt(90)
+    t.end_fill()
     base()
 
 
-def facil(x, y, fd_x, fd_y, color):
+def retangulo(x, y, fd_x, fd_y, color):
     t.pu()
     t.goto(x, y)
     t.pd()
@@ -81,24 +131,36 @@ def facil(x, y, fd_x, fd_y, color):
         t.rt(90)
     t.end_fill()
 
-def cruz(x, y):
+def cruz(x, y, fd):
     t.pu()
     t.goto(x, y)
     t.pd()
     t.begin_fill()
     for _ in range(2):
-        t.fd(41)
+        t.fd(fd)
         t.rt(90)
-        t.fd(41)
+        t.fd(fd)
         t.lt(90)
-        t.fd(41)
+        t.fd(fd)
         t.rt(90)
-        t.fd(41)
+        t.fd(fd)
         t.rt(90)
-        t.fd(41)
+        t.fd(fd)
         t.lt(90)
-        t.fd(41)
+        t.fd(fd)
         t.rt(90)
+    t.end_fill()
+
+def estrela(x, y, size, color):
+    t.pu()
+    t.goto(x, y)
+    t.color(color)
+    t.begin_fill()
+    for i in range(5):
+        t.fd(size)
+        t.left(72)
+        t.forward(size)
+        t.right(144)
     t.end_fill()
 
 def base():
