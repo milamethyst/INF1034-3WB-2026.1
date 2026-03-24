@@ -34,20 +34,27 @@ def main():
         else:
             color = '#ffffff'
         retangulo(-450, 300-(i*120), 900, 120, color)
+    triangulo(-450, 300, 600, '#cb1515')
+    estrela(-350, 25, 75, '#ffffff')
+    base()
+    
+    # Palestina
+    retangulo(-450, 300, 900, 200, '#000000')
+    retangulo(-450, 100, 900, 200, '#ffffff')
+    retangulo(-450, -100, 900, 200, '#007a3d')
     t.pu()
     t.goto(-450, 300)
     t.pd()
-    t.color('#cb1515')
+    t.color('#ce1126')
     t.begin_fill()
-    t.rt(30)
-    t.fd(600)
-    t.rt(120)
-    t.fd(600)
-    t.rt(120)
+    t.rt(45)
+    t.fd(425)
+    t.rt(90)
+    t.fd(425)
+    t.rt(135)
     t.fd(600)
     t.end_fill()
     t.setheading(0)
-    estrela(-350, 25, 75, '#ffffff')
     base()
 
     # Bandeiras difíceis
@@ -58,6 +65,19 @@ def main():
     retangulo(-450, -150, 900, 150, '#ffce00')
     retangulo(-75, 300, 150, 600, '#d21034')
     estrela(-350, 240, 50, '#ffce00')
+    base()
+
+    # África do Sul
+    retangulo(-450, 300, 900, 200, '#e03c31')
+    retangulo(-450, 100, 900, 200, '#ffffff')
+    retangulo(-450, -100, 900, 200, '#001489')
+    retangulo(-450, 300, 112.5, 600, '#ffffff')
+    triangulo(-337.5, 300, 600, '#ffffff')
+    retangulo(-450, 60, 900, 120, '#007749')
+    retangulo(-450, 300, 50, 600, '#007749')
+    triangulo(-400, 300, 600, '#007749')
+    triangulo(-450, 235, 470, '#ffb81c')
+    triangulo(-450, 202.5, 405, '#000000')
     base()
 
     # Geórgia
@@ -163,6 +183,21 @@ def estrela(x, y, size, color):
         t.right(144)
     t.end_fill()
 
+def triangulo(x, y, size, color):
+    t.pu()
+    t.goto(x, y)
+    t.pd()
+    t.color(color)
+    t.begin_fill()
+    t.rt(30)
+    t.fd(size)
+    t.rt(120)
+    t.fd(size)
+    t.rt(120)
+    t.fd(size)
+    t.end_fill()
+    t.setheading(0)
+    
 def base():
     t.pu()
     t.color('black')
