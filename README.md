@@ -12,6 +12,10 @@ Aula de introdução ao Turtle.
 Realização da atividade 2.1: Plano Cartesiano + Figuras Geométricas.
 
 ### Semana 3
-#### Aula 1: Continuação no Turtle (23/03)
+#### Aula 1: Bandeiras no Turtle (23/03)
 Continuação de programas utilizando o módulo Turtle.
 Realização da atividade 2.2: Bandeiras de Países.
+
+#### Aula 2: Mais formas geométricas no Turtle (25/03)
+Continuação de programas utilizando o módulo Turtle.
+Realização da atividade 3.1: Funções de Formas Geométricas.
