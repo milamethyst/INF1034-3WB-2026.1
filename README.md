@@ -17,5 +17,10 @@ Continuação de programas utilizando o módulo Turtle.
 Realização da atividade 2.2: Bandeiras de Países.
 
 #### Aula 2: Mais formas geométricas no Turtle (25/03)
-Continuação de programas utilizando o módulo Turtle.
+Prática de funções em programas utilizando o módulo Turtle.
 Realização da atividade 3.1: Funções de Formas Geométricas.
+
+### Semana 4
+#### Aula 1: Bandeiras com funções (30/03)
+Mais práticas de funções em programas utilizando o módulo Turtle.
+Realização da atividade 3.2: Funções nas Bandeiras.
