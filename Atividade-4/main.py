@@ -50,27 +50,26 @@ def main():
     t.color('red')
 
     t.pu()
-    x = -300
-    y = func3(x / 50)
-    t.goto(x, y)
+    x = -100
+    y = func3(x)
+    t.goto(x * 3, y)
     t.pd()
-    for x in range(-299, 301):
+    for x in range(-99, 101):
         y = func3(x)
-        t.goto(x * 3, y * 3)
+        t.goto(x * 3, y)
     sleep(2)
     t.clear()
-
 
     # y = 5 - x^2
     plano_cartesiano()
     t.color('red')
 
     t.pu()
-    x = -300
+    x = -100
     y = func4(x)
     t.goto(x, y)
     t.pd()
-    for x in range(-299, 301):
+    for x in range(-99, 101):
         y = func4(x)
         t.goto(x * 3, y * 3)
     sleep(2)
@@ -82,7 +81,7 @@ def main():
     t.color('red')
     
     t.pu()
-    x = -300
+    x = -100
     y = func5(x)
     t.goto(x, y)
     t.pd()
@@ -98,7 +97,7 @@ def main():
     plano_cartesiano()
 
     t.pu()
-    x = -300
+    x = -100
     y = func6(x)
     t.goto(x, y)
     t.pd()
