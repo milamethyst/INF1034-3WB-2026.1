@@ -1,6 +1,6 @@
 from turtle import *
-import math
 from time import sleep
+from math import sqrt
 
 t = Turtle()
 t.speed(0)
@@ -129,7 +129,7 @@ def plano_cartesiano():
 
 # y = √x (função 1)
 def func1(x):
-    y = math.sqrt(x)
+    y = sqrt(x)
     return y
 
 # y = 1/x (função 2)
