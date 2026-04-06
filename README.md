@@ -24,3 +24,11 @@ Realização da atividade 3.1: Funções de Formas Geométricas.
 #### Aula 1: Bandeiras com funções (30/03)
 Mais práticas de funções em programas utilizando o módulo Turtle.
 Realização da atividade 3.2: Funções nas Bandeiras.
+
+#### Aula 2: Funções matemáticas (01/04)
+Realização da atividade 4: Desenhando Gráficos de Funções Matemáticas
+
+### Semana 5
+#### Aula 1: Introdução ao PyGame (06/04)
+Introdução ao módulo PyGame e desenvolvimento de jogos em Python.
+Realização da atividade 5: Casinha + Recursos.
