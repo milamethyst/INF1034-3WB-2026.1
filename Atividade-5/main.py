@@ -6,7 +6,7 @@ init()
 batman_logo = image.load("./Atividade-5/batman-logo.png")
 batman_logo = transform.scale(batman_logo, (120, 120))
 batman = image.load("./Atividade-5/batman.png")
-batman = transform.scale(batman, (150, 333))
+batman = transform.scale(batman, (80, 178))
 
 batman_font = font.Font("./Atividade-5/batmfa__.ttf", 20)
 
@@ -58,10 +58,10 @@ while True:
     batman_text = batman_font.render("Even Batman needs to rest sometimes", True, (0, 0, 0))
     window.blit(batman_text, (600, 220))
 
-    window.blit(batman, (x, 430))
-    x = x + 0.1
+    window.blit(batman, (x, 450))
+    x = x + 0.08
 
-    if x > 380:
+    if x > 450:
         x = 50
 
     # MUDAR FONTE, MÚSICA E USAR LINE
