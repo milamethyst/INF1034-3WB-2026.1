@@ -3,19 +3,21 @@ import sys
 
 init()
 
-batman_logo = image.load("./Atividade-5/batman.png")
+batman_logo = image.load("./Atividade-5/batman-logo.png")
 batman_logo = transform.scale(batman_logo, (120, 120))
-batman_pixel = image.load("./Atividade-5/batman-pixel.png")
-batman_pixel = transform.scale(batman_pixel, (150, 150))
+batman = image.load("./Atividade-5/batman.png")
+batman = transform.scale(batman, (150, 333))
 
-batman_font = font.Font("./Atividade-5/batmfa__.ttf")
+batman_font = font.Font("./Atividade-5/batmfa__.ttf", 20)
 
-mixer.music.load("./Atividade-5/batman-song-1966.mp3")
+mixer.music.load("./Atividade-5/something-in-the-way-the-batman.mp3")
 mixer.music.play(-1)
 
 window = display.set_mode((1280, 720))
 
 window.fill((31, 51, 130))
+
+x = 50
 
 while True:
     for ev in event.get():
@@ -24,6 +26,7 @@ while True:
             sys.exit()
 
     # Casa
+    window.fill((31, 51, 130))
     draw.rect(window, (2, 64, 0), (0, 600, 1280, 120)) # chão
     draw.rect(window, (100, 100, 100), (320, 360, 240, 240)) # casa
     draw.rect(window, (201, 165, 34), (350, 456, 60, 96)) # janela
@@ -52,8 +55,14 @@ while True:
 
     # Imagem
     window.blit(batman_logo, (380, 260))
-    window.blit(batman_pixel, (50, 460))
     batman_text = batman_font.render("Even Batman needs to rest sometimes", True, (0, 0, 0))
-    window.blit(batman_text, (600, 200))
+    window.blit(batman_text, (600, 220))
 
+    window.blit(batman, (x, 430))
+    x = x + 0.1
+
+    if x > 380:
+        x = 50
+
+    # MUDAR FONTE, MÚSICA E USAR LINE
     display.update()
