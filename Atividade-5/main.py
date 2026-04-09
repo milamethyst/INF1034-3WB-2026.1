@@ -4,11 +4,11 @@ import sys
 init()
 
 batman_logo = image.load("./Atividade-5/batman-logo.png")
-batman_logo = transform.scale(batman_logo, (120, 120))
+batman_logo = transform.scale(batman_logo, (140, 140))
 batman = image.load("./Atividade-5/batman.png")
 batman = transform.scale(batman, (80, 178))
 
-batman_font = font.Font("./Atividade-5/batman-noir-font.otf", 20)
+batman_font = font.Font("./Atividade-5/batman-noir-font.otf", 40)
 
 mixer.music.load("./Atividade-5/something-in-the-way-the-batman.mp3")
 mixer.music.play(-1)
@@ -52,17 +52,19 @@ while True:
     nuvem(900, 100, 50)
     nuvem(600, 150, 35)
 
+    # Linhas
+    draw.line(window, (0, 0, 0), (650, 500), (650, 600), 3)
+    draw.line(window, (0, 0, 0), (770, 500), (770, 600), 3)
 
     # Imagem
-    window.blit(batman_logo, (380, 260))
+    window.blit(batman_logo, (640, 430))
     batman_text = batman_font.render("Even Batman needs to rest sometimes", True, (0, 0, 0))
     window.blit(batman_text, (600, 220))
 
     window.blit(batman, (x, 450))
-    x = x + 0.08
+    x = x + 0.064
 
     if x > 450:
         x = 50
 
-    # MUDAR FONTE, MÚSICA E USAR LINE
     display.update()
