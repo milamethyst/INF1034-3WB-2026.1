@@ -8,7 +8,7 @@ batman_logo = transform.scale(batman_logo, (120, 120))
 batman = image.load("./Atividade-5/batman.png")
 batman = transform.scale(batman, (80, 178))
 
-batman_font = font.Font("./Atividade-5/batmfa__.ttf", 20)
+batman_font = font.Font("./Atividade-5/batman-noir-font.otf", 20)
 
 mixer.music.load("./Atividade-5/something-in-the-way-the-batman.mp3")
 mixer.music.play(-1)
