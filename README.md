@@ -32,3 +32,9 @@ Realização da atividade 4: Desenhando Gráficos de Funções Matemáticas
 #### Aula 1: Introdução ao PyGame (06/04)
 Introdução ao módulo PyGame e desenvolvimento de jogos em Python.
 Realização da atividade 5: Casinha + Recursos.
+
+#### Aula 2: Continuação atividade casinha PyGame (08/04)
+Finalização da atividade 5.
+
+### Semana 6
+#### Aula 1: Mouse e teclado no PyGame (13/04)
