@@ -38,3 +38,8 @@ Finalização da atividade 5.
 
 ### Semana 6
 #### Aula 1: Mouse e teclado no PyGame (13/04)
+Introdução ao uso de mouse e teclado no PyGame.
+Início atividade 6: La Casita ULTIMATE.
+
+#### Aula 2: Continuação atividade aula 1 (15/04)
+Continuação da atividade 6.
