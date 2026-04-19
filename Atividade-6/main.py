@@ -12,9 +12,9 @@ sfx_afternoon = mixer.Sound("./Atividade-6/wind-chime.mp3")
 sfx_night = mixer.Sound("./Atividade-6/owl-hoot.mp3")
 
 # Colors
-day = (16, 198, 229)
-afternoon = (236, 174, 121)
-night = (0, 39, 89)
+day = Color(16, 198, 229)
+afternoon = Color(236, 174, 121)
+night = Color(0, 39, 89)
 sea = (64, 127, 204)
 sun = (248, 228, 143)
 moon = (229, 229, 229)
@@ -62,17 +62,6 @@ while running:
     else:
         sun_x, sun_y = mouse.get_pos()
 
-    # BG color (based on sun/moon position)
-    if sun_y < 300:
-        bg_color = day
-        text = 'Daytime in Pandora'
-    elif sun_y < 550:
-        bg_color = afternoon
-        text = 'Afternoon in Pandora'
-    else:
-        bg_color = night
-        text = 'Nighttime in Pandora'
-
     # Draw stuff
     window.fill(bg_color)   
 
@@ -87,6 +76,17 @@ while running:
     if sun_x < 40:
         sun_x = 40
     
+    # BG color (based on sun/moon position)
+    if sun_y < 300:
+        bg_color = day.lerp(afternoon, (sun_y-90)/300)
+        text = 'Daytime in Pandora'
+    else:
+        bg_color = afternoon.lerp(night, (sun_y-250)/420)
+        if sun_y < 550:
+            text = 'Afternoon in Pandora'
+        else:
+            text = 'Nighttime in Pandora'
+
     if sun_y < 550:
         draw.line(window, sun, (sun_x+50, sun_y-90), (sun_x+50, sun_y+90), 3) # top-bottom
         draw.line(window, sun, (sun_x-40, sun_y), (sun_x+140, sun_y), 3) # left-right
