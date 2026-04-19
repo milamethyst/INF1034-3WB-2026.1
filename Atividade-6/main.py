@@ -37,9 +37,9 @@ while running:
             running = False
         if ev.type == MOUSEBUTTONDOWN:
             if ev.button == 1:
-                if bg_color == day:
+                if sun_y < 300:
                     sfx_morning.play()
-                elif bg_color == afternoon:
+                elif sun_y < 550:
                     sfx_afternoon.play()
                 else:
                     sfx_night.play()
