@@ -41,8 +41,6 @@ def botoes():
 
 window.fill((255, 255, 255))   
 
-desenhar_forca(6)
-
 while running:
     for ev in event.get():
         if ev.type == QUIT:
