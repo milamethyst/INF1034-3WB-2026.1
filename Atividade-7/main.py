@@ -41,6 +41,7 @@ star_wars = transform.scale(star_wars, (200, 200))
 
 fonte = font.Font("./Atividade-7/Recursos/Outros/font.otf", 120)
 fonte_menor = font.Font("./Atividade-7/Recursos/Outros/font.otf", 80)
+fonte_menor_ainda = font.Font("./Atividade-7/Recursos/Outros/font.otf", 60)
 
 
 # variáveis
@@ -51,7 +52,10 @@ palavra = ''
 palavra_forca = ''
 letras_tentadas = []
 final = False
+pressionado = False
 texto = ''
+chute = ''
+texto_extra = ''
 
 # listas palavras
 palavras_comida = ['arroz', 'banana', 'queijo', 'alface', 'frango', 'amendoim', 'chocolate', 'pepino', 'batata', 'couve', 'carne']
@@ -147,7 +151,21 @@ while running:
                             print(tema)
                             palavra_forca = '_' * len(palavra)
                             letras_tentadas = []
-                            
+
+        if ev.type == KEYDOWN:
+            if final == False:
+                pressionado = False
+                if K_a <= ev.key <= K_z:
+                    chute += key.name(ev.key)
+                elif K_RETURN:
+                    pressionado = True
+            elif final == True:
+                if K_BACKSPACE:
+                    tema = ''
+                    jogo = 'menu'
+                elif K_RETURN:
+                    tema = ''
+            
     
 
     window.fill(muito_claro)   
@@ -162,53 +180,75 @@ while running:
                         write_text = fonte_menor.render('tema: comida!', True, medio_escuro)
                         window.blit(write_text, (480, 0))
                     case 'jogos':
-                        write_text = fonte_menor.render('tema: comida!', True, medio_escuro)
+                        write_text = fonte_menor.render('tema: jogos!', True, medio_escuro)
                         window.blit(write_text, (480, 0))
                     case 'pokemon':
-                        write_text = fonte_menor.render('tema: comida!', True, medio_escuro)
+                        write_text = fonte_menor.render('tema: pokémon!', True, medio_escuro)
                         window.blit(write_text, (480, 0))
                     case 'star wars':
-                        write_text = fonte_menor.render('tema: comida!', True, medio_escuro)
+                        write_text = fonte_menor.render('tema: star wars!', True, medio_escuro)
                         window.blit(write_text, (480, 0))
+
                 desenhar_forca(erros)
+
                 write_text = fonte_menor.render(palavra_forca, True, medio)
                 window.blit(write_text, (350, 500))
-                if palavra_forca == palavra:
-                    final = True
-                pressionado = key.name(keys)
-                while pressionado != 'enter':
-                    if pressionado in [chr(i) for i in range(97, 123)]:
-                        chute += pressionado
-                    pressionado = key.name(keys)
-                if final == False:
-                    if erros < 6:
-                        palavra_vazia = ''
-                        if chute == palavra:
-                            final = True
-                        else:
-                            if chute not in palavra:
-                                letras_tentadas += chute
-                                erros += 1
-                            for i in range(len(palavra)):
-                                if chute == palavra[i]:
-                                    palavra_vazia += chute
-                                else:
-                                    palavra_vazia += palavra_forca[i]
-                        palavra_forca = palavra_vazia
-                        texto = 'Letras erradas: '
-                        for i in range(letras_tentadas):
-                            texto += letras_tentadas[i] + ' '
-                    else:
-                        final = True
-                else:
-                    if erros == 6:
-                        texto = 'Que pena, você perdeu! A palavra era:'
-                        palavra_forca = palavra
-                    else:
-                        texto = 'Parabéns! Você venceu! A palavra era:'
+
+                write_text = fonte_menor_ainda.render(chute, True, medio)
+                window.blit(write_text, (350, 450))
                 
-                write_text = fonte_menor.render(texto, True, medio)
+                if pressionado:
+                    if chute == palavra:
+                        final = True
+                        texto_extra = ''
+                    else:
+                        if len(chute) > 1:
+                            pressionado = False
+                            texto_extra = 'A palavra que você inseriu não está certa!'
+                            chute = ''
+
+
+                texto = 'Letras erradas: '
+                segunda_linha = ', '.join(letras_tentadas)
+
+                if pressionado:
+                    texto_extra = ''
+                    if final == False:
+                        if erros < 6:
+                            palavra_vazia = ''
+                            if chute == palavra:
+                                final = True
+                            else:
+                                if chute not in palavra:
+                                    if chute not in letras_tentadas:
+                                        letras_tentadas.append(chute)
+                                        erros += 1
+                                for i in range(len(palavra)):
+                                    if chute == palavra[i]:
+                                        palavra_vazia += chute
+                                    else:
+                                        palavra_vazia += palavra_forca[i]
+                            palavra_forca = palavra_vazia
+                        else:
+                            final = True
+                    else:
+                        if erros == 6:
+                            texto = 'Que pena, você perdeu! A palavra era:'
+                            segunda_linha = palavra
+                            texto_extra = 'pressione enter para jogar de novo ou backspace para voltar'
+                        else:
+                            texto = 'Parabéns! Você venceu! A palavra era:'
+                            segunda_linha = palavra
+                            texto_extra = 'pressione enter para jogar de novo ou backspace para voltar'
+                            palavra_forca = palavra
+                    chute = ''
+                
+                write_text = fonte_menor_ainda.render(texto, True, medio)
                 window.blit(write_text, (370, 250))
+                write_text = fonte_menor_ainda.render(segunda_linha, True, medio)
+                window.blit(write_text, (370, 320))
+                write_text = fonte_menor_ainda.render(texto_extra, True, medio)
+                window.blit(write_text, (370, 390))
                 
 
 
