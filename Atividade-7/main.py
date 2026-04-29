@@ -39,14 +39,19 @@ pokemon = transform.scale(pokemon, (200, 200))
 star_wars = image.load("./Atividade-7/Recursos/Botões/Temas Forca/star wars.png")
 star_wars = transform.scale(star_wars, (200, 200))
 
-font = font.Font("./Atividade-7/Recursos/Outros/font.otf", 120)
+fonte = font.Font("./Atividade-7/Recursos/Outros/font.otf", 120)
+fonte_menor = font.Font("./Atividade-7/Recursos/Outros/font.otf", 80)
 
 
 # variáveis
 jogo = 'menu'
-texto_usuario = ''
 erros = 0
 tema = ''
+palavra = ''
+palavra_forca = ''
+letras_tentadas = []
+final = False
+texto = ''
 
 # listas palavras
 palavras_comida = ['arroz', 'banana', 'queijo', 'alface', 'frango', 'amendoim', 'chocolate', 'pepino', 'batata', 'couve', 'carne']
@@ -76,7 +81,7 @@ def desenhar_forca(erros):
 
 def botoes(modo):
     if modo == 'menu':
-        write_text = font.render('jogos!', True, medio_escuro)
+        write_text = fonte.render('jogos!', True, medio_escuro)
         window.blit(write_text, (520, 0))
         draw.rect(window, botao, (60, 100, 560, 280), 0, 20)
         window.blit(forca, (240, 140))
@@ -87,11 +92,8 @@ def botoes(modo):
         draw.rect(window, botao, (660, 420, 560, 280), 0, 20)
         window.blit(adivinhacao, (840, 460))
 
-    elif modo == 'ppt':
-        draw.rect(window)
-
     elif modo == 'forca':
-        write_text = font.render('temas!', True, medio_escuro)
+        write_text = fonte.render('temas!', True, medio_escuro)
         window.blit(write_text, (520, 0))
         draw.rect(window, botao, (60, 100, 560, 280), 0, 20)
         window.blit(comida, (240, 140))
@@ -102,10 +104,15 @@ def botoes(modo):
         draw.rect(window, botao, (660, 420, 560, 280), 0, 20)
         window.blit(star_wars, (840, 460))
 
+    elif modo == 'ppt':
+        draw.rect(window)
+
+
 
 while running:
     clock.tick(60)
     x, y = mouse.get_pos()
+    keys = key.get_pressed()
 
     for ev in event.get():
         if ev.type == QUIT:
@@ -116,6 +123,7 @@ while running:
                     case 'menu':
                         if (60 <= x <= 620 and 100 <= y <= 380):
                             jogo = 'forca'
+                            tema = ''
                         elif (660 <= x <= 1220 and 100 <= y <= 380):
                             jogo = 'ppt'
                         elif (60 <= x <= 620 and 420 <= y <= 700):
@@ -123,14 +131,23 @@ while running:
                         elif (660 <= x <= 1220 and 420 <= y <= 700):
                             jogo = 'adiv'
                     case 'forca':
-                        if (60 <= x <= 620 and 100 <= y <= 380):
-                            tema = 'comida'
-                        elif (660 <= x <= 1220 and 100 <= y <= 380):
-                            tema = 'jogos'
-                        elif (60 <= x <= 620 and 420 <= y <= 700):
-                            tema = 'pokemon'
-                        elif (660 <= x <= 1220 and 420 <= y <= 700):
-                            tema = 'star wars'                
+                        if palavra == '':
+                            if (60 <= x <= 620 and 100 <= y <= 380):
+                                tema = 'comida'
+                                palavra = choice(palavras_comida)
+                            elif (660 <= x <= 1220 and 100 <= y <= 380):
+                                tema = 'jogos'
+                                palavra = choice(palavras_jogos)
+                            elif (60 <= x <= 620 and 420 <= y <= 700):
+                                tema = 'pokemon'
+                                palavra = choice(palavras_pokemon)
+                            elif (660 <= x <= 1220 and 420 <= y <= 700):
+                                tema = 'star wars'  
+                                palavra = choice(palavras_starwars)
+                            print(tema)
+                            palavra_forca = '_' * len(palavra)
+                            letras_tentadas = []
+                            
     
 
     window.fill(muito_claro)   
@@ -142,11 +159,59 @@ while running:
             else:
                 match tema:
                     case 'comida':
-                        palavra = choice(palavras_comida)
+                        write_text = fonte_menor.render('tema: comida!', True, medio_escuro)
+                        window.blit(write_text, (480, 0))
                     case 'jogos':
-                        palavra = choice()
-            #palavra = choice(palavras_comida)
-            #desenhar_forca(erros)
+                        write_text = fonte_menor.render('tema: comida!', True, medio_escuro)
+                        window.blit(write_text, (480, 0))
+                    case 'pokemon':
+                        write_text = fonte_menor.render('tema: comida!', True, medio_escuro)
+                        window.blit(write_text, (480, 0))
+                    case 'star wars':
+                        write_text = fonte_menor.render('tema: comida!', True, medio_escuro)
+                        window.blit(write_text, (480, 0))
+                desenhar_forca(erros)
+                write_text = fonte_menor.render(palavra_forca, True, medio)
+                window.blit(write_text, (350, 500))
+                if palavra_forca == palavra:
+                    final = True
+                pressionado = key.name(keys)
+                while pressionado != 'enter':
+                    if pressionado in [chr(i) for i in range(97, 123)]:
+                        chute += pressionado
+                    pressionado = key.name(keys)
+                if final == False:
+                    if erros < 6:
+                        palavra_vazia = ''
+                        if chute == palavra:
+                            final = True
+                        else:
+                            if chute not in palavra:
+                                letras_tentadas += chute
+                                erros += 1
+                            for i in range(len(palavra)):
+                                if chute == palavra[i]:
+                                    palavra_vazia += chute
+                                else:
+                                    palavra_vazia += palavra_forca[i]
+                        palavra_forca = palavra_vazia
+                        texto = 'Letras erradas: '
+                        for i in range(letras_tentadas):
+                            texto += letras_tentadas[i] + ' '
+                    else:
+                        final = True
+                else:
+                    if erros == 6:
+                        texto = 'Que pena, você perdeu! A palavra era:'
+                        palavra_forca = palavra
+                    else:
+                        texto = 'Parabéns! Você venceu! A palavra era:'
+                
+                write_text = fonte_menor.render(texto, True, medio)
+                window.blit(write_text, (370, 250))
+                
+
+
         case 'ppt':
             botoes('ppt')
         case 'calc':
