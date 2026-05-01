@@ -39,12 +39,21 @@ pokemon = transform.scale(pokemon, (200, 200))
 star_wars = image.load("./Atividade-7/Recursos/Botões/Temas Forca/star wars.png")
 star_wars = transform.scale(star_wars, (200, 200))
 
+pedra = image.load("./Atividade-7/Recursos/Botões/Pedra Papel Tesoura/pedra.png")
+pedra = transform.scale(pedra, (300, 300))
+papel = image.load("./Atividade-7/Recursos/Botões/Pedra Papel Tesoura/papel.png")
+papel = transform.scale(papel, (300, 300))
+tesoura = image.load("./Atividade-7/Recursos/Botões/Pedra Papel Tesoura/tesoura.png")
+tesoura = transform.scale(tesoura, (300, 300))
+
 fonte = font.Font("./Atividade-7/Recursos/Outros/font.otf", 120)
 fonte_menor = font.Font("./Atividade-7/Recursos/Outros/font.otf", 80)
 fonte_menor_ainda = font.Font("./Atividade-7/Recursos/Outros/font.otf", 60)
+fonte_mini = font.Font("./Atividade-7/Recursos/Outros/font.otf", 30)
 
 
 # variáveis
+mensagem_voltar = 'pressione enter para jogar de novo ou backspace para voltar'
 jogo = 'menu'
 erros = 0
 tema = ''
@@ -56,13 +65,15 @@ pressionado = False
 texto = ''
 chute = ''
 texto_extra = ''
+jogada = 0
 
 # listas palavras
 palavras_comida = ['arroz', 'banana', 'queijo', 'alface', 'frango', 'amendoim', 'chocolate', 'pepino', 'batata', 'couve', 'carne']
 palavras_jogos = ['controle', 'steam', 'playstation', 'xbox', 'nintendo', 'overwatch', 'valorant', 'console', 'minecraft', 'computador', 'mouse', 'teclado', 'ranqueada', 'genshin', 'atari', 'gameboy', 'overcooked', 'fortnite', 'undertale', 'deltarune', 'bloons', 'megabonk', 'peak', 'spiritfarer']
-palavras_pokemon = ['pikachu', 'wooper', 'quagsire', 'oshawott', 'piplup', 'lucario', 'bulbasaur', 'ivysaur', 'venusaur', 'charmander', 'charmeleon', 'charizard', 'squirtle', 'wartortle', 'blastoise', 'caterpie', 'metapod', 'butterfree', 'weedle', 'kakuna', 'beedrill', 'pidgey', 'pidgeotto', 'pidgeot', 'rattata', 'raichu', 'vaporeon', 'jolteon', 'flareon', 'espeon', 'umbreon', 'leafeon', 'glaceon', 'sylveon', 'eevee', 'clefairy', 'clefable', 'vulpix', 'ninetales', 'zubat', 'jigglypuff', 'meowth']
+palavras_pokemon = ['pikachu', 'wooper', 'quagsire', 'oshawott', 'piplup', 'lucario', 'bulbasaur', 'ivysaur', 'venusaur', 'charmander', 'charmeleon', 'charizard', 'squirtle', 'wartortle', 'blastoise', 'caterpie', 'metapod', 'butterfree', 'weedle', 'kakuna', 'beedrill', 'pidgey', 'pidgeotto', 'pidgeot', 'rattata', 'raichu', 'vaporeon', 'jolteon', 'flareon', 'espeon', 'umbreon', 'leafeon', 'glaceon', 'sylveon', 'eevee', 'clefairy', 'clefable', 'vulpix', 'ninetales', 'zubat', 'jigglypuff', 'meowth', 'psyduck', 'growlithe', 'arcanine', 'poliwag', 'poliwhirl', 'abra', 'machop', 'weepinbell', 'geodude', 'ponyta', 'slowpoke', 'gengar', 'chansey', 'horsea', 'magikarp', 'gyarados', 'ditto', 'lapras', 'snorlax', 'dragonite', 'chikorita', 'cyndaquil', 'typhlosion', 'totodile', 'togepi', 'mareep']
 palavras_starwars = ['skywalker', 'vader', 'jedi', 'anakin', 'sith', 'yoga']
 
+# funções
 def desenhar_forca(erros):
     # forca
     draw.line(window, (0, 0, 0), (175, 600), (225, 600), 4)
@@ -82,6 +93,48 @@ def desenhar_forca(erros):
         draw.line(window, (0, 0, 0), (280, 470), (300, 450), 2) # perna 1
     if erros >= 6:
         draw.line(window, (0, 0, 0), (300, 450), (320, 470), 2) # perna 2
+
+def pedra_papel_tesoura(jogada):
+    ppt_computador = randint(1, 3)
+    match (jogada, ppt_computador):
+        case (1, 1):
+            img_jogador = pedra
+            img_computador = pedra
+            texto = 'Empate!'
+        case (1, 2):
+            img_jogador = pedra
+            img_computador = papel
+            texto = 'Você perdeu!'
+        case (1, 3):
+            img_jogador = pedra
+            img_computador = tesoura
+            texto = 'Você venceu!'
+        case (2, 1):
+            img_jogador = papel
+            img_computador = pedra
+            texto = 'Você venceu!'
+        case (2, 2):
+            img_jogador = papel
+            img_computador = papel
+            texto = 'Empate!'
+        case (2, 3):
+            img_jogador = papel
+            img_computador = tesoura
+            texto = 'Você perdeu!'
+        case (3, 1):
+            img_jogador = tesoura
+            img_computador = pedra
+            texto = 'Você perdeu!'
+        case (3, 2):
+            img_jogador = tesoura
+            img_computador = papel
+            texto = 'Você venceu!'
+        case (3, 3):
+            img_jogador = tesoura
+            img_computador = tesoura
+            texto = 'Empate!'
+        
+    return img_jogador, img_computador, texto
 
 def botoes(modo):
     if modo == 'menu':
@@ -109,7 +162,12 @@ def botoes(modo):
         window.blit(star_wars, (840, 460))
 
     elif modo == 'ppt':
-        draw.rect(window)
+        draw.rect(window, botao, (60, 60, 360, 600), 0, 20)
+        window.blit(pedra, (90, 210))
+        draw.rect(window, botao, (460, 60, 360, 600), 0, 20)
+        window.blit(papel, (490, 210))
+        draw.rect(window, botao, (860, 60, 360, 600), 0, 20)
+        window.blit(tesoura, (890, 210))
 
 
 
@@ -148,23 +206,43 @@ while running:
                             elif (660 <= x <= 1220 and 420 <= y <= 700):
                                 tema = 'star wars'  
                                 palavra = choice(palavras_starwars)
-                            print(tema)
                             palavra_forca = '_' * len(palavra)
                             letras_tentadas = []
+                    case 'ppt':
+                        if jogada == 0:
+                            if (60 <= x <= 420 and 60 <= y <= 660):
+                                jogada = 1
+                                img_jogador, img_computador, texto = pedra_papel_tesoura(jogada)
+                            elif (460 <= x <= 820 and 60 <= y <= 660):
+                                jogada = 2
+                                img_jogador, img_computador, texto = pedra_papel_tesoura(jogada)
+                            elif (860 <= x <= 1020 and 60 <= y <= 660):
+                                jogada = 3
+                                img_jogador, img_computador, texto = pedra_papel_tesoura(jogada)
 
         if ev.type == KEYDOWN:
-            if final == False:
-                pressionado = False
-                if K_a <= ev.key <= K_z:
-                    chute += key.name(ev.key)
-                elif K_RETURN:
-                    pressionado = True
-            elif final == True:
-                if K_BACKSPACE:
+            if jogo == 'forca':
+                if final == False:
+                    pressionado = False
+                    if K_a <= ev.key <= K_z:
+                        chute += key.name(ev.key)
+                    elif K_RETURN:
+                        pressionado = True
+                elif final == True:
+                    if K_BACKSPACE:
+                        jogo = 'menu'
+                    elif K_RETURN:
+                        jogo = 'forca'
+                    erros = 0
                     tema = ''
-                    jogo = 'menu'
-                elif K_RETURN:
-                    tema = ''
+                    palavra = ''
+                    palavra_forca = ''
+                    letras_tentadas = []
+                    final = False
+                    pressionado = False
+                    texto = ''
+                    chute = ''
+                    texto_extra = ''
             
     
 
@@ -198,6 +276,7 @@ while running:
                 window.blit(write_text, (350, 450))
                 
                 if pressionado:
+                    print(chute)
                     if chute == palavra:
                         final = True
                         texto_extra = ''
@@ -216,30 +295,30 @@ while running:
                     if final == False:
                         if erros < 6:
                             palavra_vazia = ''
-                            if chute == palavra:
-                                final = True
-                            else:
-                                if chute not in palavra:
-                                    if chute not in letras_tentadas:
-                                        letras_tentadas.append(chute)
-                                        erros += 1
-                                for i in range(len(palavra)):
-                                    if chute == palavra[i]:
-                                        palavra_vazia += chute
-                                    else:
-                                        palavra_vazia += palavra_forca[i]
+                            if chute not in palavra:
+                                if chute not in letras_tentadas:
+                                    letras_tentadas.append(chute)
+                                    erros += 1
+                                    print(letras_tentadas)
+                            for i in range(len(palavra)):
+                                if chute == palavra[i]:
+                                    palavra_vazia += chute
+                                else:
+                                    palavra_vazia += palavra_forca[i]
                             palavra_forca = palavra_vazia
+                            if palavra_forca == palavra:
+                                final = True
                         else:
                             final = True
                     else:
                         if erros == 6:
                             texto = 'Que pena, você perdeu! A palavra era:'
                             segunda_linha = palavra
-                            texto_extra = 'pressione enter para jogar de novo ou backspace para voltar'
+                            texto_extra = mensagem_voltar
                         else:
                             texto = 'Parabéns! Você venceu! A palavra era:'
                             segunda_linha = palavra
-                            texto_extra = 'pressione enter para jogar de novo ou backspace para voltar'
+                            texto_extra = mensagem_voltar
                             palavra_forca = palavra
                     chute = ''
                 
@@ -247,13 +326,25 @@ while running:
                 window.blit(write_text, (370, 250))
                 write_text = fonte_menor_ainda.render(segunda_linha, True, medio)
                 window.blit(write_text, (370, 320))
-                write_text = fonte_menor_ainda.render(texto_extra, True, medio)
+                write_text = fonte_mini.render(texto_extra, True, medio)
                 window.blit(write_text, (370, 390))
                 
-
-
         case 'ppt':
-            botoes('ppt')
+            if jogada == 0:
+                botoes('ppt')
+            else:
+                write_text = fonte_menor_ainda.render('Sua jogada:', True, escuro)
+                window.blit(write_text, (220, 150))
+                window.blit(img_jogador, (190, 210))
+                write_text = fonte_menor_ainda.render('Computador:', True, escuro)
+                window.blit(write_text, (800, 150))
+                window.blit(img_computador, (790, 210))
+                write_text = fonte.render(texto, True, medio_escuro)
+                window.blit(write_text, (420, 0))
+
+                write_text = fonte_mini.render(mensagem_voltar, True, medio)
+                window.blit(write_text, (300, 600))
+
         case 'calc':
             botoes('calc')
         case 'adiv':
