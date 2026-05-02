@@ -46,14 +46,25 @@ papel = transform.scale(papel, (300, 300))
 tesoura = image.load("./Atividade-7/Recursos/Botões/Pedra Papel Tesoura/tesoura.png")
 tesoura = transform.scale(tesoura, (300, 300))
 
-fonte = font.Font("./Atividade-7/Recursos/Outros/font.otf", 120)
-fonte_menor = font.Font("./Atividade-7/Recursos/Outros/font.otf", 80)
-fonte_menor_ainda = font.Font("./Atividade-7/Recursos/Outros/font.otf", 60)
-fonte_mini = font.Font("./Atividade-7/Recursos/Outros/font.otf", 30)
+jogador = image.load("./Atividade-7/Recursos/Botões/Adivinhação/jogador.png")
+jogador = transform.scale(jogador, (300, 300))
+computador = image.load("./Atividade-7/Recursos/Botões/Adivinhação/computador.png")
+computador = transform.scale(computador, (300, 300))
+menor = image.load("./Atividade-7/Recursos/Botões/Adivinhação/menor.png")
+menor = transform.scale(menor, (300, 300))
+maior = image.load("./Atividade-7/Recursos/Botões/Adivinhação/maior.png")
+maior = transform.scale(maior, (300, 300))
+venceu = image.load("./Atividade-7/Recursos/Botões/Adivinhação/venceu.png")
+venceu = transform.scale(venceu, (300, 300))
+
+fonte = font.Font("./Atividade-7/Recursos/Outros/font.ttf", 100)
+fonte_menor = font.Font("./Atividade-7/Recursos/Outros/font.ttf", 60)
+fonte_menor_ainda = font.Font("./Atividade-7/Recursos/Outros/font.ttf", 40)
+fonte_mini = font.Font("./Atividade-7/Recursos/Outros/font.ttf", 30)
 
 
 # variáveis
-mensagem_voltar = 'pressione enter para jogar de novo ou backspace para voltar'
+mensagem_voltar = 'pressione enter para jogar de novo \nou backspace para voltar'
 jogo = 'menu'
 erros = 0
 tema = ''
@@ -66,6 +77,15 @@ texto = ''
 chute = ''
 texto_extra = ''
 jogada = 0
+adivinha = ''
+pontos = 0
+ppt_computador = 0
+num_aleatorio = 0
+num_chute = 0
+min = 1
+max = 1023
+tentativas = 1
+segunda_linha = ''
 
 # listas palavras
 palavras_comida = ['arroz', 'banana', 'queijo', 'alface', 'frango', 'amendoim', 'chocolate', 'pepino', 'batata', 'couve', 'carne']
@@ -93,48 +113,6 @@ def desenhar_forca(erros):
         draw.line(window, (0, 0, 0), (280, 470), (300, 450), 2) # perna 1
     if erros >= 6:
         draw.line(window, (0, 0, 0), (300, 450), (320, 470), 2) # perna 2
-
-def pedra_papel_tesoura(jogada):
-    ppt_computador = randint(1, 3)
-    match (jogada, ppt_computador):
-        case (1, 1):
-            img_jogador = pedra
-            img_computador = pedra
-            texto = 'Empate!'
-        case (1, 2):
-            img_jogador = pedra
-            img_computador = papel
-            texto = 'Você perdeu!'
-        case (1, 3):
-            img_jogador = pedra
-            img_computador = tesoura
-            texto = 'Você venceu!'
-        case (2, 1):
-            img_jogador = papel
-            img_computador = pedra
-            texto = 'Você venceu!'
-        case (2, 2):
-            img_jogador = papel
-            img_computador = papel
-            texto = 'Empate!'
-        case (2, 3):
-            img_jogador = papel
-            img_computador = tesoura
-            texto = 'Você perdeu!'
-        case (3, 1):
-            img_jogador = tesoura
-            img_computador = pedra
-            texto = 'Você perdeu!'
-        case (3, 2):
-            img_jogador = tesoura
-            img_computador = papel
-            texto = 'Você venceu!'
-        case (3, 3):
-            img_jogador = tesoura
-            img_computador = tesoura
-            texto = 'Empate!'
-        
-    return img_jogador, img_computador, texto
 
 def botoes(modo):
     if modo == 'menu':
@@ -169,12 +147,29 @@ def botoes(modo):
         draw.rect(window, botao, (860, 60, 360, 600), 0, 20)
         window.blit(tesoura, (890, 210))
 
+    elif modo == 'adiv':
+        write_text = fonte_menor.render('quem vai adivinhar?', True, medio_escuro)
+        window.blit(write_text, (320, 20))
+        draw.rect(window, botao, (60, 100, 560, 600), 0, 20)
+        window.blit(jogador, (190, 250))
+        draw.rect(window, botao, (660, 100, 560, 600), 0, 20)
+        window.blit(computador, (790, 250))
+
+    elif modo == 'adiv-comp':
+        write_text = fonte_menor.render(f'O computador chutou {num_chute}', True, medio_escuro)
+        window.blit(write_text, (250, 20))
+        draw.rect(window, botao, (60, 100, 360, 600), 0, 20)
+        window.blit(menor, (90, 250))
+        draw.rect(window, botao, (460, 100, 360, 600), 0, 20)
+        window.blit(venceu, (490, 250))
+        draw.rect(window, botao, (860, 100, 360, 600), 0, 20)
+        window.blit(maior, (890, 250))
+
 
 
 while running:
     clock.tick(60)
     x, y = mouse.get_pos()
-    keys = key.get_pressed()
 
     for ev in event.get():
         if ev.type == QUIT:
@@ -212,13 +207,42 @@ while running:
                         if jogada == 0:
                             if (60 <= x <= 420 and 60 <= y <= 660):
                                 jogada = 1
-                                img_jogador, img_computador, texto = pedra_papel_tesoura(jogada)
                             elif (460 <= x <= 820 and 60 <= y <= 660):
                                 jogada = 2
-                                img_jogador, img_computador, texto = pedra_papel_tesoura(jogada)
                             elif (860 <= x <= 1020 and 60 <= y <= 660):
                                 jogada = 3
-                                img_jogador, img_computador, texto = pedra_papel_tesoura(jogada)
+                            ppt_computador = randint(1, 3)
+                            match (jogada, ppt_computador):
+                                case (1, 1) | (2, 2) | (3, 3):
+                                    texto = 'Empate!'
+                                    print('entrou no match')
+                                case (1, 2) | (2, 3) | (3, 1):
+                                    texto = 'Você perdeu!'
+                                    print('entrou no match')
+                                    pontos -= 1
+                                case (1, 3) | (2, 1) | (3, 2):
+                                    texto = 'Você venceu!'
+                                    print('entrou no match')
+                                    pontos += 1
+                    case 'adiv':
+                        if adivinha == '':
+                            if (60 <= x <= 620 and 100 <= y <= 700):
+                                adivinha = 'jogador'
+                                num_aleatorio = randint(min, max)
+                                segunda_linha = 'Digite um número entre 1 e 1023'
+                            elif (660 <= x <= 1220 and 100 <= y <= 700):
+                                adivinha = 'computador'
+                                num_chute = (min + max) // 2
+                        elif adivinha == 'computador':
+                            if (60 <= x <= 420 and 100 <= y <= 700):
+                                max = num_chute
+                                tentativas += 1
+                            elif (460 <= x <= 820 and 100 <= y <= 700):
+                                final = True
+                            elif (860 <= x <= 1220 and 100 <= y <= 700):
+                                min = num_chute
+                                tentativas += 1
+                            num_chute = (min + max) // 2
 
         if ev.type == KEYDOWN:
             if jogo == 'forca':
@@ -243,8 +267,32 @@ while running:
             elif jogo == 'ppt':
                 if ev.key == K_BACKSPACE:
                     jogo = 'menu'
+                    pontos = 0
                 jogada = 0
-
+            elif jogo == 'adiv':
+                if final == True:
+                    if ev.key == K_BACKSPACE:
+                        jogo = 'menu'
+                    tentativas = 1
+                    adivinha = ''
+                    chute = ''
+                    final = False
+                    pressionado = False
+                    segunda_linha = 'Digite um número entre 1 e 1023'
+                    num_chute = 0
+                else:
+                    if ev.unicode.isdigit():
+                        chute += ev.unicode
+                        pressionado = False
+                    elif ev.key == K_BACKSPACE:
+                        chute = chute[:-1]
+                        pressionado = False
+                    elif ev.key == K_RETURN:
+                        pressionado = True
+                        num_chute = int(chute)
+                        chute = ''
+                        if num_chute == num_aleatorio:
+                            final = True
     
 
     window.fill(muito_claro)   
@@ -332,22 +380,69 @@ while running:
             if jogada == 0:
                 botoes('ppt')
             else:
+                img_jogador = {1: pedra, 2: papel, 3: tesoura}.get(jogada)
+                img_computador = {1: pedra, 2: papel, 3: tesoura}.get(ppt_computador)
+
+                write_text = fonte.render(texto, True, medio_escuro)
+                window.blit(write_text, (250, 0))
                 write_text = fonte_menor_ainda.render('Sua jogada:', True, escuro)
                 window.blit(write_text, (220, 150))
                 window.blit(img_jogador, (190, 210))
                 write_text = fonte_menor_ainda.render('Computador:', True, escuro)
                 window.blit(write_text, (800, 150))
                 window.blit(img_computador, (790, 210))
-                write_text = fonte.render(texto, True, medio_escuro)
-                window.blit(write_text, (420, 0))
 
-                write_text = fonte_mini.render(mensagem_voltar, True, medio)
+                write_text = fonte_mini.render(f'pontuação: {pontos}\n{mensagem_voltar}', True, medio)
                 window.blit(write_text, (300, 600))
 
         case 'calc':
             botoes('calc')
+        
         case 'adiv':
-            botoes('adiv')
+            if adivinha == '':
+                botoes('adiv')
+            elif adivinha == 'jogador':
+                write_text = fonte_menor.render(chute, True, medio)
+                window.blit(write_text, (350, 500))
+
+                if pressionado:
+                    if final:
+                        texto = 'Parabéns, você venceu!'
+                        segunda_linha = f'O número era {num_aleatorio}\nVocê acertou em {tentativas} tentativas'
+                        window.blit(venceu, (490, 250))
+                        texto_extra = mensagem_voltar
+                    else:
+                        segunda_linha = f'Número de chutes: {tentativas}'
+                        if num_aleatorio < num_chute:
+                            texto = f'O número é menor que {num_chute}'
+                            tentativas += 1
+                        else:
+                            texto = f'O número é maior que {num_chute}'
+                            tentativas += 1
+                        pressionado = False
+
+                    
+                
+                write_text = fonte_menor.render(texto, True, medio_escuro)
+                window.blit(write_text, (200, 0))
+                write_text = fonte_menor_ainda.render(segunda_linha, True, medio_escuro)
+                window.blit(write_text, (300, 100))
+                write_text = fonte_mini.render(texto_extra, True, medio)
+                window.blit(write_text, (300, 600))
+            elif adivinha == 'computador':
+                if final == False:
+                    botoes('adiv-comp')
+                else:
+                    write_text = fonte.render('O computador acertou!', True, medio_escuro)
+                    window.blit(write_text, (40, 0))
+
+                    write_text = fonte_menor.render(f'Número de chutes: {tentativas}', True, medio_escuro)
+                    window.blit(write_text, (300, 100))
+                    window.blit(venceu, (490, 250))
+
+                    write_text = fonte_mini.render(mensagem_voltar, True, medio)
+                    window.blit(write_text, (300, 600))
+
         case default:
             botoes('menu')
 
