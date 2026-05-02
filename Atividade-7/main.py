@@ -226,24 +226,25 @@ while running:
                     pressionado = False
                     if K_a <= ev.key <= K_z:
                         chute += key.name(ev.key)
-                    elif K_RETURN:
+                    elif ev.key == K_BACKSPACE:
+                        chute = chute[:-1]
+                    elif ev.key == K_RETURN:
                         pressionado = True
                 elif final == True:
-                    if K_BACKSPACE:
+                    if ev.key == K_BACKSPACE:
                         jogo = 'menu'
-                    elif K_RETURN:
-                        jogo = 'forca'
                     erros = 0
                     tema = ''
                     palavra = ''
-                    palavra_forca = ''
-                    letras_tentadas = []
                     final = False
                     pressionado = False
-                    texto = ''
                     chute = ''
                     texto_extra = ''
-            
+            elif jogo == 'ppt':
+                if ev.key == K_BACKSPACE:
+                    jogo = 'menu'
+                jogada = 0
+
     
 
     window.fill(muito_claro)   
@@ -276,7 +277,6 @@ while running:
                 window.blit(write_text, (350, 450))
                 
                 if pressionado:
-                    print(chute)
                     if chute == palavra:
                         final = True
                         texto_extra = ''
@@ -299,7 +299,6 @@ while running:
                                 if chute not in letras_tentadas:
                                     letras_tentadas.append(chute)
                                     erros += 1
-                                    print(letras_tentadas)
                             for i in range(len(palavra)):
                                 if chute == palavra[i]:
                                     palavra_vazia += chute
