@@ -17,7 +17,6 @@ claro = Color(255, 235, 251)
 muito_claro = Color(255, 243, 253)
 
 botao = Color(224, 190, 218)
-botao_apertado = Color(163, 92, 150)
 
 
 # imagens
@@ -94,6 +93,8 @@ volta1 = image.load("./Atividade-7/Recursos/Botões/Calculadora/volta1.png")
 volta1 = transform.scale(volta1, (144, 144))
 volta_tudo = image.load("./Atividade-7/Recursos/Botões/Calculadora/volta-tudo.png")
 volta_tudo = transform.scale(volta_tudo, (144, 144))
+sair = image.load("./Atividade-7/Recursos/Botões/Calculadora/sair.png")
+sair = transform.scale(sair, (144, 144))
 
 fonte = font.Font("./Atividade-7/Recursos/Outros/font.ttf", 100)
 fonte_menor = font.Font("./Atividade-7/Recursos/Outros/font.ttf", 60)
@@ -124,6 +125,10 @@ min = 1
 max = 1023
 tentativas = 1
 segunda_linha = ''
+num1 = 0
+num2 = 0
+resultado = 0
+opera = ''
 
 # listas palavras
 palavras_comida = ['arroz', 'banana', 'queijo', 'alface', 'frango', 'amendoim', 'chocolate', 'pepino', 'batata', 'couve', 'carne']
@@ -204,40 +209,48 @@ def botoes(modo):
         window.blit(maior, (890, 250))
 
     elif modo == 'calc':
-        draw.rect(window, botao_apertado, (344, 2), ())
-        draw.circle(window, botao, (418, 208), 72)
-        window.blit(img7, (346, 136))
-        draw.circle(window, botao, (566, 208), 72)
-        window.blit(img8, (494, 136))
-        draw.circle(window, botao, (714, 208), 72)
-        window.blit(img9, (642, 136))
-        draw.circle(window, botao, (862, 208), 72)
-        window.blit(divisao, (790, 136))
-        draw.circle(window, botao, (418, 354), 72)
-        window.blit(img4, (346, 282))
-        draw.circle(window, botao, (566, 354), 72)
-        window.blit(img5, (494, 282))
-        draw.circle(window, botao, (714, 354), 72)
-        window.blit(img6, (642, 282))
-        draw.circle(window, botao, (862, 354), 72)
-        window.blit(multi, (790, 282))
-        draw.circle(window, botao, (418, 500), 72)
-        window.blit(img1, (346, 428))
-        draw.circle(window, botao, (566, 500), 72)
-        window.blit(img2, (494, 428))
-        draw.circle(window, botao, (714, 500), 72)
-        window.blit(img3, (642, 428))
-        draw.circle(window, botao, (862, 500), 72)
-        window.blit(sub, (790, 428))
-        draw.circle(window, botao, (418, 646), 72)
-        window.blit(img0, (346, 574))
-        draw.circle(window, botao, (566, 646), 72)
-        window.blit(ponto, (494, 574))
-        draw.circle(window, botao, (714, 646), 72)
-        window.blit(igual, (642, 574))
-        draw.circle(window, botao, (862, 646), 72)
-        window.blit(adicao, (790, 574))
-
+        draw.rect(window, botao, (342, 2, 596, 718), 0, 20)
+        draw.rect(window, muito_claro, (350, 10, 580, 120), 0, 15)
+        draw.circle(window, claro, (418, 208), 72)
+        window.blit(img7, (346, 136)) # 7 -> 346 x 490 , 136 y 280
+        draw.circle(window, claro, (566, 208), 72)
+        window.blit(img8, (494, 136)) # 8 -> 494 x 638 , 136 y 280
+        draw.circle(window, claro, (714, 208), 72)
+        window.blit(img9, (642, 136)) # 9 -> 642 x 786 , 136 y 280
+        draw.circle(window, claro, (862, 208), 72)
+        window.blit(divisao, (790, 136)) # / -> 790 x 934 , 136 y 280
+        draw.circle(window, claro, (418, 354), 72)
+        window.blit(img4, (346, 282)) # 4 -> 346 x 490 , 282 y 426
+        draw.circle(window, claro, (566, 354), 72)
+        window.blit(img5, (494, 282)) # 5 -> 494 x 638 , 282 y 426
+        draw.circle(window, claro, (714, 354), 72)
+        window.blit(img6, (642, 282)) # 6 -> 642 x 786 , 282 y 426
+        draw.circle(window, claro, (862, 354), 72)
+        window.blit(multi, (790, 282)) # * -> 790 x 934 , 282 y 426
+        draw.circle(window, claro, (418, 500), 72)
+        window.blit(img1, (346, 428)) # 1 -> 346 x 490 , 428 y 572
+        draw.circle(window, claro, (566, 500), 72)
+        window.blit(img2, (494, 428)) # 2 -> 494 x 638 , 428 y 572
+        draw.circle(window, claro, (714, 500), 72)
+        window.blit(img3, (642, 428)) # 3 -> 642 x 786 , 428 y 572
+        draw.circle(window, claro, (862, 500), 72)
+        window.blit(sub, (790, 428)) # - -> 790 x 934 , 428 y 572
+        draw.circle(window, claro, (418, 646), 72)
+        window.blit(img0, (346, 574)) # 0 -> 346 x 490 , 574 y 718
+        draw.circle(window, claro, (566, 646), 72)
+        window.blit(ponto, (494, 574)) # . -> 494 x 638 , 574 y 718
+        draw.circle(window, claro, (714, 646), 72)
+        window.blit(igual, (642, 574)) # = -> 642 x 786 , 574 y 718
+        draw.circle(window, claro, (862, 646), 72)
+        window.blit(adicao, (790, 574)) # + -> 790 x 934 , 574 y 718
+       
+        draw.circle(window, botao, (1110, 230), 72)
+        window.blit(volta1, (1038, 158)) # < -> 1038 x 1182 , 158 y 302
+        draw.circle(window, botao, (1110, 490), 72)
+        window.blit(volta_tudo, (1038, 418)) # << -> 1038 x 1182 , 418 y 562
+        
+        draw.circle(window, botao, (150, 360), 72)
+        window.blit(sair, (78, 288)) # sair -> 78 x 222, 288 y 432
 
 while running:
     clock.tick(60)
@@ -315,6 +328,107 @@ while running:
                                 min = num_chute
                                 tentativas += 1
                             num_chute = (min + max) // 2
+                    case 'calc':
+                        final = False
+                        # 0 -> 346 x 490, 574 y 718
+                        if (346 <= x <= 490 and 574 <= y <= 718):
+                            texto += '0'
+                        # 1 -> 346 x 490, 428 y 572
+                        elif (346 <= x <= 490 and 428 <= y <= 572):
+                            texto += '1'
+                        # 2 -> 494 x 638, 428 y 572
+                        elif (494 <= x <= 638 and 428 <= y <= 572):
+                            texto += '2'
+                        # 3 -> 642 x 786, 428 y 572
+                        elif (642 <= x <= 786 and 428 <= y <= 572):
+                            texto += '3'
+                        # 4 -> 346 x 490, 282 y 426
+                        elif (346 <= x <= 490 and 282 <= y <= 426):
+                            texto += '4'
+                        # 5 -> 494 x 638, 282 y 426
+                        elif (494 <= x <= 638 and 282 <= y <= 426):
+                            texto += '5'
+                        # 6 -> 642 x 786, 282 y 426
+                        elif (642 <= x <= 786 and 282 <= y <= 426):
+                            texto += '6'
+                        # 7 -> 346 x 490, 136 y 280
+                        elif (346 <= x <= 490 and 136 <= y <= 280):
+                            texto += '7'
+                        # 8 -> 494 x 638, 136 y 280
+                        elif (494 <= x <= 638 and 136 <= y <= 280):
+                            texto += '8'
+                        # 9 -> 642 x 786, 136 y 280
+                        elif (642 <= x <= 786 and 136 <= y <= 280):
+                            texto += '9'
+                        # + -> 790 x 934, 574 y 718
+                        elif (790 <= x <= 934 and 574 <= y <= 718):
+                            if texto != '':
+                                num1 = float(texto)
+                            else:
+                                num1 = resultado
+                                texto += str(num1)
+                            texto += '+'
+                            opera = '+'
+                        # - -> 790 x 934, 428 y 572
+                        elif (790 <= x <= 934 and 428 <= y <= 572):
+                            if texto != '':
+                                num1 = float(texto)
+                            else:
+                                num1 = resultado
+                                texto += str(num1)
+                            texto += '-'
+                            opera = '-'
+                        # * -> 790 x 934, 282 y 426
+                        elif (790 <= x <= 934 and 282 <= y <= 426):
+                            if texto != '':
+                                num1 = float(texto)
+                            else:
+                                num1 = resultado
+                                texto += str(num1)
+                            texto += '*'
+                            opera = '*'
+                        # / -> 790 x 934, 136 y 280
+                        elif (790 <= x <= 934 and 136 <= y <= 280):
+                            if texto != '':
+                                num1 = float(texto)
+                            else:
+                                num1 = resultado
+                                texto += str(num1)
+                            texto += '/'
+                            opera = '/'
+                        # . -> 494 x 638, 574 y 718
+                        elif (494 <= x <= 638 and 574 <= y <= 718):
+                            texto += '.'
+                        # = -> 642 x 786, 574 y 718
+                        elif (642 <= x <= 786 and 574 <= y <= 718):
+                            num2 = float(texto.partition(opera)[2])
+                            if opera == '+':
+                                resultado = num1 + num2
+                            elif opera == '-':
+                                resultado = num1 - num2
+                            elif opera == '*':
+                                resultado = num1 * num2
+                            elif opera == '/':
+                                resultado = num1 / num2
+                            final = True
+                            texto = ''
+                        
+                        # < -> 1038 x 1182 , 158 y 302
+                        elif (1038 <= x <= 1182 and 158 <= y <= 302):
+                            texto = texto[:-1]
+                        # << -> 1038 x 1182 , 418 y 562
+                        elif (1038 <= x <= 1182 and 418 <= y <= 562):
+                            texto = ''
+
+                        # sair -> 78 x 222, 288 y 432
+                        elif (78 <= x <= 222 and 288 <= y <= 432):
+                            texto = ''
+                            resultado = 0
+                            num1 = 0
+                            num2 = 0
+                            opera = ''
+                            jogo = 'menu'
+
 
         if ev.type == KEYDOWN:
             if jogo == 'forca':
@@ -472,6 +586,14 @@ while running:
 
         case 'calc':
             botoes('calc')
+            if final == False:
+                text_surface = fonte_menor.render(texto, True, escuro)
+                text_rect = text_surface.get_rect(midright=(930, 85))
+                window.blit(text_surface, text_rect)
+            else:
+                text_surface = fonte_menor.render(str(resultado), True, escuro)
+                text_rect = text_surface.get_rect(midright=(930, 85))
+                window.blit(text_surface, text_rect)
         
         case 'adiv':
             if adivinha == '':
