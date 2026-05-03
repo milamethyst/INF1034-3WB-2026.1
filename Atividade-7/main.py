@@ -362,38 +362,50 @@ while running:
                             texto += '9'
                         # + -> 790 x 934, 574 y 718
                         elif (790 <= x <= 934 and 574 <= y <= 718):
-                            if texto != '':
-                                num1 = float(texto)
+                            if opera == '':
+                                if texto != '':
+                                    num1 = float(texto)
+                                else:
+                                    num1 = resultado
+                                    texto += str(num1)
                             else:
-                                num1 = resultado
-                                texto += str(num1)
+                                texto = texto[:-1]
                             texto += '+'
                             opera = '+'
                         # - -> 790 x 934, 428 y 572
                         elif (790 <= x <= 934 and 428 <= y <= 572):
-                            if texto != '':
-                                num1 = float(texto)
+                            if opera == ':':
+                                if texto != '':
+                                    num1 = float(texto)
+                                else:
+                                    num1 = resultado
+                                    texto += str(num1)
                             else:
-                                num1 = resultado
-                                texto += str(num1)
+                                texto = texto[:-1]
                             texto += '-'
                             opera = '-'
                         # * -> 790 x 934, 282 y 426
                         elif (790 <= x <= 934 and 282 <= y <= 426):
-                            if texto != '':
-                                num1 = float(texto)
+                            if opera == '':
+                                if texto != '':
+                                    num1 = float(texto)
+                                else:
+                                    num1 = resultado
+                                    texto += str(num1)
                             else:
-                                num1 = resultado
-                                texto += str(num1)
+                                texto = texto[:-1]
                             texto += '*'
                             opera = '*'
                         # / -> 790 x 934, 136 y 280
                         elif (790 <= x <= 934 and 136 <= y <= 280):
-                            if texto != '':
-                                num1 = float(texto)
+                            if opera == '':
+                                if texto != '':
+                                    num1 = float(texto)
+                                else:
+                                    num1 = resultado
+                                    texto += str(num1)
                             else:
-                                num1 = resultado
-                                texto += str(num1)
+                                texto = texto[:-1]
                             texto += '/'
                             opera = '/'
                         # . -> 494 x 638, 574 y 718
@@ -412,6 +424,7 @@ while running:
                                 resultado = num1 / num2
                             final = True
                             texto = ''
+                            opera = ''
                         
                         # < -> 1038 x 1182 , 158 y 302
                         elif (1038 <= x <= 1182 and 158 <= y <= 302):
