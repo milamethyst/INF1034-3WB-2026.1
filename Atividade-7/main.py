@@ -21,13 +21,13 @@ botao_apertado = Color(163, 92, 150)
 
 
 # imagens
-forca = image.load("./Atividade-7/Recursos/Botões/forca.png")
+forca = image.load("./Atividade-7/Recursos/Botões/Jogos/forca.png")
 forca = transform.scale(forca, (200, 200))
-ppt = image.load("./Atividade-7/Recursos/Botões/pedra-papel-tesoura.png")
+ppt = image.load("./Atividade-7/Recursos/Botões/Jogos/pedra-papel-tesoura.png")
 ppt = transform.scale(ppt, (200, 200))
-calculadora = image.load("./Atividade-7/Recursos/Botões/calculadora.png")
+calculadora = image.load("./Atividade-7/Recursos/Botões/Jogos/calculadora.png")
 calculadora = transform.scale(calculadora, (200, 200))
-adivinhacao = image.load("./Atividade-7/Recursos/Botões/adivinhação.png")
+adivinhacao = image.load("./Atividade-7/Recursos/Botões/Jogos/adivinhação.png")
 adivinhacao = transform.scale(adivinhacao, (200, 200))
 
 comida = image.load("./Atividade-7/Recursos/Botões/Temas Forca/comida.png")
@@ -56,6 +56,44 @@ maior = image.load("./Atividade-7/Recursos/Botões/Adivinhação/maior.png")
 maior = transform.scale(maior, (300, 300))
 venceu = image.load("./Atividade-7/Recursos/Botões/Adivinhação/venceu.png")
 venceu = transform.scale(venceu, (300, 300))
+
+img0 = image.load("./Atividade-7/Recursos/Botões/Calculadora/0.png")
+img0 = transform.scale(img0, (144, 144))
+img1 = image.load("./Atividade-7/Recursos/Botões/Calculadora/1.png")
+img1 = transform.scale(img1, (144, 144))
+img2 = image.load("./Atividade-7/Recursos/Botões/Calculadora/2.png")
+img2 = transform.scale(img2, (144, 144))
+img3 = image.load("./Atividade-7/Recursos/Botões/Calculadora/3.png")
+img3 = transform.scale(img3, (144, 144))
+img4 = image.load("./Atividade-7/Recursos/Botões/Calculadora/4.png")
+img4 = transform.scale(img4, (144, 144))
+img5 = image.load("./Atividade-7/Recursos/Botões/Calculadora/5.png")
+img5 = transform.scale(img5, (144, 144))
+img6 = image.load("./Atividade-7/Recursos/Botões/Calculadora/6.png")
+img6 = transform.scale(img6, (144, 144))
+img7 = image.load("./Atividade-7/Recursos/Botões/Calculadora/7.png")
+img7 = transform.scale(img7, (144, 144))
+img8 = image.load("./Atividade-7/Recursos/Botões/Calculadora/8.png")
+img8 = transform.scale(img8, (144, 144))
+img9 = image.load("./Atividade-7/Recursos/Botões/Calculadora/9.png")
+img9 = transform.scale(img9, (144, 144))
+
+adicao = image.load("./Atividade-7/Recursos/Botões/Calculadora/adição.png")
+adicao = transform.scale(adicao, (144, 144))
+divisao = image.load("./Atividade-7/Recursos/Botões/Calculadora/divisão.png")
+divisao = transform.scale(divisao, (144, 144))
+igual = image.load("./Atividade-7/Recursos/Botões/Calculadora/igual.png")
+igual = transform.scale(igual, (144, 144))
+multi = image.load("./Atividade-7/Recursos/Botões/Calculadora/multiplicação.png")
+multi = transform.scale(multi, (144, 144))
+ponto = image.load("./Atividade-7/Recursos/Botões/Calculadora/ponto.png")
+ponto = transform.scale(ponto, (144, 144))
+sub = image.load("./Atividade-7/Recursos/Botões/Calculadora/subtração.png")
+sub = transform.scale(sub, (144, 144))
+volta1 = image.load("./Atividade-7/Recursos/Botões/Calculadora/volta1.png")
+volta1 = transform.scale(volta1, (144, 144))
+volta_tudo = image.load("./Atividade-7/Recursos/Botões/Calculadora/volta-tudo.png")
+volta_tudo = transform.scale(volta_tudo, (144, 144))
 
 fonte = font.Font("./Atividade-7/Recursos/Outros/font.ttf", 100)
 fonte_menor = font.Font("./Atividade-7/Recursos/Outros/font.ttf", 60)
@@ -165,6 +203,40 @@ def botoes(modo):
         draw.rect(window, botao, (860, 100, 360, 600), 0, 20)
         window.blit(maior, (890, 250))
 
+    elif modo == 'calc':
+        draw.rect(window, botao_apertado, (344, 2), ())
+        draw.circle(window, botao, (418, 208), 72)
+        window.blit(img7, (346, 136))
+        draw.circle(window, botao, (566, 208), 72)
+        window.blit(img8, (494, 136))
+        draw.circle(window, botao, (714, 208), 72)
+        window.blit(img9, (642, 136))
+        draw.circle(window, botao, (862, 208), 72)
+        window.blit(divisao, (790, 136))
+        draw.circle(window, botao, (418, 354), 72)
+        window.blit(img4, (346, 282))
+        draw.circle(window, botao, (566, 354), 72)
+        window.blit(img5, (494, 282))
+        draw.circle(window, botao, (714, 354), 72)
+        window.blit(img6, (642, 282))
+        draw.circle(window, botao, (862, 354), 72)
+        window.blit(multi, (790, 282))
+        draw.circle(window, botao, (418, 500), 72)
+        window.blit(img1, (346, 428))
+        draw.circle(window, botao, (566, 500), 72)
+        window.blit(img2, (494, 428))
+        draw.circle(window, botao, (714, 500), 72)
+        window.blit(img3, (642, 428))
+        draw.circle(window, botao, (862, 500), 72)
+        window.blit(sub, (790, 428))
+        draw.circle(window, botao, (418, 646), 72)
+        window.blit(img0, (346, 574))
+        draw.circle(window, botao, (566, 646), 72)
+        window.blit(ponto, (494, 574))
+        draw.circle(window, botao, (714, 646), 72)
+        window.blit(igual, (642, 574))
+        draw.circle(window, botao, (862, 646), 72)
+        window.blit(adicao, (790, 574))
 
 
 while running:
@@ -280,6 +352,9 @@ while running:
                     pressionado = False
                     segunda_linha = 'Digite um número entre 1 e 1023'
                     num_chute = 0
+                    min = 1
+                    max = 1023
+                    texto_extra = ''
                 else:
                     if ev.unicode.isdigit():
                         chute += ev.unicode
