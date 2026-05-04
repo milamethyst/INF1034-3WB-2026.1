@@ -22,36 +22,60 @@ def tem_numero(palavra):
             return True
     return False # retorna False se percorreu toda a string e não encontrou nenhum número
 
+# def codifica_cesar(senha):
+#     senha_nova = ''
+#     for caracter in senha:
+#         if caracter.isdigit():
+#             ref = ord('0')
+#             decimal = ord(caracter) # transforma na posição na tabela ascii
+#             decimal -= ref # subtrai o valor de referência
+#             decimal += 3 # adiciona 3
+#             decimal = decimal % (ord('9') - ref + 1) # obtem o resto (do máximo menos a referência + 1)
+#             decimal += ref # soma o valor de referência
+#             senha_nova += chr(decimal) # adiciona o caracter novo na senha criptografada
+#         elif caracter.islower():
+#             ref = ord('a')
+#             decimal = ord(caracter)
+#             decimal -= ref
+#             decimal += 3
+#             decimal = decimal % (ord('z') - ref + 1)
+#             decimal += ref
+#             senha_nova += chr(decimal)
+#         elif caracter.isupper():
+#             ref = ord('A')
+#             decimal = ord(caracter)
+#             decimal -= ref
+#             decimal += 3
+#             decimal = decimal % (ord('Z') - ref + 1)
+#             decimal += ref
+#             senha_nova += chr(decimal)
+#         else:
+#             senha_nova += caracter
+#     return senha_nova
+
 def codifica_cesar(senha):
     senha_nova = ''
     for caracter in senha:
-        if caracter.isdigit():
-            ref = ord('0')
+        if caracter.isdigit() or caracter.isalpha():
+            max = 0
+            ref = 0
+            if caracter.isdigit():
+                ref = ord('0')
+                max = ord('9')
+            elif caracter.islower():
+                ref = ord('a')
+                max = ord('z')
+            elif caracter.isupper():
+                ref = ord('A')
+                max = ord('Z')
             decimal = ord(caracter) # transforma na posição na tabela ascii
             decimal -= ref # subtrai o valor de referência
             decimal += 3 # adiciona 3
-            decimal = decimal % (ord('9') - ref + 1) # obtem o resto (do máximo menos a referência + 1)
+            decimal = decimal % (max - ref + 1) # obtem o resto (do máximo menos a referência + 1)
             decimal += ref # soma o valor de referência
             senha_nova += chr(decimal) # adiciona o caracter novo na senha criptografada
-        elif caracter.islower():
-            ref = ord('a')
-            decimal = ord(caracter)
-            decimal -= ref
-            decimal += 3
-            decimal = decimal % (ord('z') - ref + 1)
-            decimal += ref
-            senha_nova += chr(decimal)
-        elif caracter.isupper():
-            ref = ord('A')
-            decimal = ord(caracter)
-            decimal -= ref
-            decimal += 3
-            decimal = decimal % (ord('Z') - ref + 1)
-            decimal += ref
-            senha_nova += chr(decimal)
         else:
             senha_nova += caracter
     return senha_nova
-
 
 print(codifica_cesar('Abc@123Zz'))
