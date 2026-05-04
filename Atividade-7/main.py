@@ -594,8 +594,10 @@ while running:
                 window.blit(write_text, (800, 150))
                 window.blit(img_computador, (790, 210))
 
-                write_text = fonte_mini.render(f'pontuação: {pontos}\n{mensagem_voltar}', True, medio)
+                write_text = fonte_mini.render(f'pontuação: {pontos}', True, medio)
                 window.blit(write_text, (300, 600))
+                write_text = fonte_mini.render(mensagem_voltar, True, medio)
+                window.blit(write_text, (300, 650))
 
         case 'calc':
             botoes('calc')
