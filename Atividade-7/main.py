@@ -99,11 +99,11 @@ sair = transform.scale(sair, (144, 144))
 fonte = font.Font("./Atividade-7/Recursos/Outros/font.ttf", 100)
 fonte_menor = font.Font("./Atividade-7/Recursos/Outros/font.ttf", 60)
 fonte_menor_ainda = font.Font("./Atividade-7/Recursos/Outros/font.ttf", 40)
-fonte_mini = font.Font("./Atividade-7/Recursos/Outros/font.ttf", 30)
+fonte_mini = font.Font("./Atividade-7/Recursos/Outros/font.ttf", 25)
 
 
 # variáveis
-mensagem_voltar = 'pressione enter para jogar de novo \nou backspace para voltar'
+mensagem_voltar = 'pressione enter para jogar de novo ou backspace para voltar'
 jogo = 'menu'
 erros = 0
 tema = ''
@@ -134,7 +134,7 @@ opera = ''
 palavras_comida = ['arroz', 'banana', 'queijo', 'alface', 'frango', 'amendoim', 'chocolate', 'pepino', 'batata', 'couve', 'carne']
 palavras_jogos = ['controle', 'steam', 'playstation', 'xbox', 'nintendo', 'overwatch', 'valorant', 'console', 'minecraft', 'computador', 'mouse', 'teclado', 'ranqueada', 'genshin', 'atari', 'gameboy', 'overcooked', 'fortnite', 'undertale', 'deltarune', 'bloons', 'megabonk', 'peak', 'spiritfarer']
 palavras_pokemon = ['pikachu', 'wooper', 'quagsire', 'oshawott', 'piplup', 'lucario', 'bulbasaur', 'ivysaur', 'venusaur', 'charmander', 'charmeleon', 'charizard', 'squirtle', 'wartortle', 'blastoise', 'caterpie', 'metapod', 'butterfree', 'weedle', 'kakuna', 'beedrill', 'pidgey', 'pidgeotto', 'pidgeot', 'rattata', 'raichu', 'vaporeon', 'jolteon', 'flareon', 'espeon', 'umbreon', 'leafeon', 'glaceon', 'sylveon', 'eevee', 'clefairy', 'clefable', 'vulpix', 'ninetales', 'zubat', 'jigglypuff', 'meowth', 'psyduck', 'growlithe', 'arcanine', 'poliwag', 'poliwhirl', 'abra', 'machop', 'weepinbell', 'geodude', 'ponyta', 'slowpoke', 'gengar', 'chansey', 'horsea', 'magikarp', 'gyarados', 'ditto', 'lapras', 'snorlax', 'dragonite', 'chikorita', 'cyndaquil', 'typhlosion', 'totodile', 'togepi', 'mareep']
-palavras_starwars = ['skywalker', 'vader', 'jedi', 'anakin', 'sith', 'yoga']
+palavras_starwars = ['skywalker', 'vader', 'jedi', 'anakin', 'sith', 'yoda']
 
 # funções
 def desenhar_forca(erros):
