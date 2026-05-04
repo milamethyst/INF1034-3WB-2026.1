@@ -620,7 +620,7 @@ while running:
                 if pressionado:
                     if final:
                         texto = 'Parabéns, você venceu!'
-                        segunda_linha = f'O número era {num_aleatorio}\nVocê acertou em {tentativas} tentativas'
+                        segunda_linha = f'O número era {num_aleatorio}! Você acertou em {tentativas} tentativas'
                         window.blit(venceu, (490, 250))
                         texto_extra = mensagem_voltar
                     else:
@@ -638,7 +638,7 @@ while running:
                 write_text = fonte_menor.render(texto, True, medio_escuro)
                 window.blit(write_text, (200, 0))
                 write_text = fonte_menor_ainda.render(segunda_linha, True, medio_escuro)
-                window.blit(write_text, (300, 100))
+                window.blit(write_text, (100, 100))
                 write_text = fonte_mini.render(texto_extra, True, medio)
                 window.blit(write_text, (300, 600))
             elif adivinha == 'computador':
