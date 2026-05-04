@@ -1,29 +1,57 @@
 def valida_email(email):
-    return email[-8:] == '@puc.com'
+    return email[-8:] == '@puc.com' # retorna True se o final for @puc.com
 
 def valida_senha(senha):
-    return len(senha) >= 8 and tem_maiuscula(senha) and tem_minuscula(senha) and tem_numero(senha)
+    return len(senha) >= 8 and tem_maiuscula(senha) and tem_minuscula(senha) and tem_numero(senha) # retorna True apenas se todos os parâmetros são True
 
 def tem_maiuscula(palavra):
-    for letra in palavra:
-        if letra.isupper():
+    for caracter in palavra:
+        if caracter.isupper():
             return True
-    return False
+    return False # retorna False se percorreu toda a string e não encontrou nenhuma maiúscula
 
 def tem_minuscula(palavra):
-    for letra in palavra:
-        if letra.islower():
+    for caracter in palavra:
+        if caracter.islower():
             return True
-    return False
+    return False # retorna False se percorreu toda a string e não encontrou nenhuma minúscula
 
 def tem_numero(palavra):
-    for letra in palavra:
-        if letra.isdigit():
+    for caracter in palavra:
+        if caracter.isdigit():
             return True
-    return False
+    return False # retorna False se percorreu toda a string e não encontrou nenhum número
+
+def codifica_cesar(senha):
+    senha_nova = ''
+    for caracter in senha:
+        if caracter.isdigit():
+            ref = ord('0')
+            decimal = ord(caracter) # transforma na posição na tabela ascii
+            decimal -= ref # subtrai o valor de referência
+            decimal += 3 # adiciona 3
+            decimal = decimal % (ord('9') - ref + 1) # obtem o resto (do máximo menos a referência + 1)
+            decimal += ref # soma o valor de referência
+            senha_nova += chr(decimal) # adiciona o caracter novo na senha criptografada
+        elif caracter.islower():
+            ref = ord('a')
+            decimal = ord(caracter)
+            decimal -= ref
+            decimal += 3
+            decimal = decimal % (ord('z') - ref + 1)
+            decimal += ref
+            senha_nova += chr(decimal)
+        elif caracter.isupper():
+            ref = ord('A')
+            decimal = ord(caracter)
+            decimal -= ref
+            decimal += 3
+            decimal = decimal % (ord('Z') - ref + 1)
+            decimal += ref
+            senha_nova += chr(decimal)
+        else:
+            senha_nova += caracter
+    return senha_nova
 
 
-# Você deverá escrever uma função booleana que irá determinar se uma senha é ou não boa (segura). 
-# Foi definido que uma boa senha tem pelo menos 8 caracteres, que devem ser formados por pelo menos uma letra maiúscula, pelo menos uma letra minúscula e pelo menos um número. 
-# Sua função deve retornar True se a senha passada para ela como seu único parâmetro é segura ou não. 
-# Caso contrário, ela deve retornar False (100XP);
+print(codifica_cesar('Abc@123Zz'))
