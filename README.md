@@ -43,3 +43,15 @@ Início atividade 6: La Casita ULTIMATE.
 
 #### Aula 2: Continuação atividade aula 1 (15/04)
 Continuação da atividade 6.
+
+### Semana 7
+#### Aula 1: Jogos no PyGame (27/04)
+Início da atividade 7: Gincana dos Joguitos.
+
+#### Aula 2: Continuação atividade aula 1 (29/04)
+Continuação da atividade 7. (com todos os extras)
+
+### Semana 8
+#### Aula 1: Login e validação (04/05)
+Aula sobre login, senhas e criptografia em Python.
+Início da atividade 8: Login, Senha e Criptografia. (com parte em PyGame)
