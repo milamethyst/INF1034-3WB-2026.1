@@ -463,6 +463,7 @@ while running:
                     pressionado = False
                     chute = ''
                     texto_extra = ''
+                    texto = ''
             elif jogo == 'ppt':
                 if ev.key == K_BACKSPACE:
                     jogo = 'menu'
