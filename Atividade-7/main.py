@@ -456,6 +456,7 @@ while running:
                 elif final == True:
                     if ev.key == K_BACKSPACE:
                         jogo = 'menu'
+                        texto = ''
                     erros = 0
                     tema = ''
                     palavra = ''
@@ -468,11 +469,13 @@ while running:
                 if ev.key == K_BACKSPACE:
                     jogo = 'menu'
                     pontos = 0
+                    texto = ''
                 jogada = 0
             elif jogo == 'adiv':
                 if final == True:
                     if ev.key == K_BACKSPACE:
                         jogo = 'menu'
+                        texto = ''
                     tentativas = 1
                     adivinha = ''
                     chute = ''
