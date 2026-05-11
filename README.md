@@ -55,3 +55,11 @@ Continuação da atividade 7. (com todos os extras)
 #### Aula 1: Login e validação (04/05)
 Aula sobre login, senhas e criptografia em Python.
 Início da atividade 8: Login, Senha e Criptografia. (com parte em PyGame)
+
+#### Aula 2: Continuação atividade aula 1 (06/05)
+Continuação da atividade 8.
+
+### Semana 9
+#### Aula 1: Fractais e Recursão (11/05)
+Retorno ao Turtle para uma última atividade relacionada a fractais e recursão.
+Início da realização da atividade 9.
