@@ -9,14 +9,15 @@ colormode(255)
 t.screen.bgcolor('black')
 
 def main():
-    t.teleport(-175, 50)
-    star_frac(t, 300)
+    t.setheading(90)
+    t.teleport(250, -100)
+    sq_frac1(t, 80)
 
     sleep(5)
     t.clear()
-    t.setheading(90)
-    t.teleport(250, -100)
-    sq_frac(t, 80)
+    t.setheading(0)
+    t.teleport(-175, 50)
+    star_frac(t, 300)
 
     sleep(5)
     t.clear()
@@ -34,8 +35,9 @@ def main():
 def random_color():
     return (randint(0, 255), randint(0, 255), randint(0, 255))
 
-def sq_frac(t, size, step = 100):
+def sq_frac1(t, size, step = 100):
     if size == 0 or step == 0:
+        sq_frac2(t, size, step)
         return
     t.pu()
     t.fd(size / 1.5)
@@ -44,7 +46,23 @@ def sq_frac(t, size, step = 100):
     t.color(random_color())
     sq(t, size)
     t.end_fill()
-    sq_frac(t, size - 1, step - 1)
+    t.color('white')
+    sq(t, size)
+    sq_frac1(t, size - 1, step - 1)
+
+def sq_frac2(t, size, step = 100):
+    if size == 100 or step == 100:
+        return
+    t.pu()
+    t.fd(size / 1.5)
+    t.lt(10)
+    t.begin_fill()
+    t.color(random_color())
+    sq(t, size)
+    t.end_fill()
+    t.color('white')
+    sq(t, size)
+    sq_frac2(t, size + 1, step + 1)
 
 def sq(t, size):
     t.pd()
