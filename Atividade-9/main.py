@@ -76,7 +76,13 @@ def tree_frac(t, size, angle, level = 0):
     t.color(tree_levels[level])
     t.back(size)
 
-    t.lt(angle * 2)
+    t.lt(angle)
+    t.fd(size)
+    tree_frac(t, size * 0.8, angle, level + 1)
+    t.color(tree_levels[level])
+    t.back(size)
+
+    t.lt(angle)
     t.fd(size)
     tree_frac(t, size * 0.8, angle, level + 1)
     t.color(tree_levels[level])
