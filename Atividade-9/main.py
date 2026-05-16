@@ -89,8 +89,8 @@ def triangle_frac(t, size, level  = 0):
     if size < 40:
         triangle(t, size)
         return
-    # if level == 0:
-    #     triangle(t, size)
+    if level == 0:
+        triangle(t, size)
 
     triangle_frac(t, size / 2, level + 1)
 
