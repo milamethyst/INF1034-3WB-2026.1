@@ -1,4 +1,5 @@
 from pygame import *
+from random import randint
 import sys
 
 nums = [100, 120, 130, 120, 150, 100, 160, 200, 190, 110, 115, 125, 135, 170, 130]
@@ -27,3 +28,14 @@ def contabiliza_totais(nums, lista_total):
                 lista_total[i_cat] += 1
                 break
     return lista_total
+
+def desenha(screen):
+    screen_h = screen.get_height()
+    for i in range(len(lista_total)):
+        x = 100 + i * 50
+        h = 20 * lista_total[i]
+        draw.rect(screen, random_color(), (x, screen_h - h, 25, h))
+
+        
+def random_color():
+    return (randint(0, 255), randint(0, 255), randint(0, 255))
