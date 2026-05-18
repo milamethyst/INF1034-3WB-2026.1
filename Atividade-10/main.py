@@ -1,7 +1,7 @@
 from pygame import *
 import sys
 
-nums = []
+nums = [100, 120, 130, 120, 150, 100, 160, 200, 190, 110, 115, 125, 135, 170, 130]
 
 num_cat = 4
 num_min = min(nums)
@@ -9,3 +9,21 @@ num_max = max(nums)
 tam_cat = (num_max - num_min) / num_cat
 lista_total = [0] * num_cat
 
+def contabiliza_totais(nums, lista_total):
+    # para cada número na lista
+    for i in range(len(nums)):
+        if nums[i] == num_max:
+            lista_total[-1] += 1
+            continue
+
+        # para cada faixa/categoria
+        for i_cat in range(num_cat):
+            # obtém os limites inferior e superior
+            lim_inf = num_min + i_cat * tam_cat
+            lim_sup = lim_inf + tam_cat
+
+            # checa em qual faixa/categoria o número está com base nesses limites
+            if lim_inf <= nums[i] < lim_sup:
+                lista_total[i_cat] += 1
+                break
+    return lista_total
