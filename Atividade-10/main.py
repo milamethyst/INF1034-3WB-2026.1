@@ -12,6 +12,7 @@ window = display.set_mode((1280, 720))
 tela = 0
 
 num = ''
+texto = ''
 
 listas = [[randint(100, 300) for _ in range(50)], [100, 120, 130, 120, 150, 100, 160, 200, 190, 110, 115, 125, 135, 170, 130], []]
 
@@ -25,6 +26,7 @@ cores = [[], [], []]
 fonte_mini = font.SysFont("Arial", 15)
 fonte_menor = font.SysFont("Arial", 20)
 fonte = font.SysFont("Arial", 30)
+fonte_grande = font.SysFont("Arial", 40, True)
 
 def calcula_mins_maxs(id):
     num_min = min(listas[id])
@@ -131,6 +133,14 @@ def tela_geral(tela):
     draw.line(window, '#FFFFFF', (1265, 360), (1245, 345), 2)
     draw.line(window, '#FFFFFF', (1265, 360), (1245, 375), 2)
 
+    match tela:
+        case 0:
+            texto = 'Lista aleatória'
+        case 1:
+            texto = 'Lista fixa'
+        case 2:
+            texto = 'Lista personalizada'
+
     if tela == 2:
         draw.rect(window, '#FFFFFF', (570, 600, 140, 50), 2)
         write_text = fonte.render(num, True, '#FFFFFF')
@@ -140,6 +150,10 @@ def tela_geral(tela):
     if len(listas[tela]) > 0:
         desenha(tela)
 
+
+    write_text = fonte_grande.render(texto, True, '#FFFFFF')
+    text_rect = write_text.get_rect(center=(640, 50))
+    window.blit(write_text, text_rect)
     draw.line(window, '#FFFFFF', (100, 500), (1180, 500), 2)
     draw.line(window, '#FFFFFF', (200, 500), (200, 100), 2)
 
