@@ -12,8 +12,10 @@ boar = image.load("./Atividade-11/spritesheets/Boar_Attack.png")
 boar = transform.scale(boar, (320, 256))
 fox = image.load("./Atividade-11/spritesheets/Fox_Death.png")
 fox = transform.scale(fox, (384, 256))
-hare = image.load("./Atividade-11/spritesheets/Hare_Walk.png")
+hare_walk = image.load("./Atividade-11/spritesheets/Hare_Walk.png")
+hare_walk = transform.scale(hare_walk, (320, 256))
 hare_jump = image.load("./Atividade-11/spritesheets/Hare_Run.png")
+hare_jump = transform.scale(hare_jump, (384, 256))
 
 fonte = font.SysFont("Arial", 20)
 
@@ -32,6 +34,12 @@ anim_time_button = 0
 frame_boar = 0
 frame_fox = 0
 
+hare_ground = 500
+hare_frame = 0
+hare_anim_time = 0
+hare_jump_frame = 0
+hare_jump_anim_time = 0
+
 run_animation = False
 jump = False
 right = True
@@ -49,6 +57,10 @@ while running:
                 jump = True
             if ev.key == K_RETURN:
                 run_animation = True
+            if (ev.key == K_UP or ev.key == K_w) and not jump:
+                jump = True
+                hare_jump_frame = 0
+                hare_jump_anim_time = 0
 
     # pássaro voando (constante)
     anim_time_still = anim_time_still + dt
@@ -83,10 +95,55 @@ while running:
                 frame_fox = 0
         
     # movimentação
+    hare_moving = False
 
 
+    if keys[K_LEFT] or keys[K_a]:
+        right = False
+        hare_moving = True
+        hare_x -= 3
+    if keys[K_RIGHT] or keys[K_d]:
+        right = True
+        hare_moving = True
+        hare_x += 3
 
-    print(frame_boar, frame_fox)
+    if jump:
+        hare_jump_anim_time += dt
+        if hare_jump_anim_time / 1000 > 0.1:
+            hare_jump_anim_time = 0
+            if hare_jump_frame < 3:
+                hare_y -= 30
+            else:
+                hare_y += 30
+            hare_jump_frame += 1
+            if hare_jump_frame > 5:
+                hare_jump_frame = 0
+                jump = False
+    else:
+        if hare_moving:
+            hare_anim_time += dt
+            if hare_anim_time / 1000 > 0.1:
+                hare_frame = (hare_frame + 1) % 5
+                hare_anim_time = 0
+        else:
+            hare_frame = 0
+
+    if jump:
+        hare = hare_jump
+        curr_hare_frame = hare_jump_frame
+    else:
+        hare = hare_walk
+        curr_hare_frame = hare_frame
+
+    if right:
+        row = 3
+    else:
+        row = 2
+
+    if hare_x < 0:
+        hare_x = 0
+    if hare_x > 720:
+        hare_x = 720
     window.fill((255, 255, 255))
 
     write_text = fonte.render('pressione "Enter" para rodar a animação', True, '#000000')
@@ -96,5 +153,6 @@ while running:
     window.blit(grouse, grouse_pos, (64 * (curr_frame_still % 6), 0, 64, 64))
     window.blit(fox, fox_pos, (64 * (frame_fox % 6), 128, 64, 64))
     window.blit(boar, boar_pos, (64 * (frame_boar % 5), 192, 64, 64))
+    window.blit(hare, (hare_x, hare_y), (64 * curr_hare_frame, 64 * row, 64, 64))
 
     display.update()
