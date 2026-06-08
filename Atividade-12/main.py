@@ -29,7 +29,7 @@ hare_jump = image.load("./Atividade-11/spritesheets/Hare_Run.png")
 hare_jump = transform.scale(hare_jump, (384, 256))
 
 # tileset e fundo
-tileset = image.load("./Atividade-12/Assets/Floor Tiles1.png")
+tileset = image.load("./Atividade-12/Assets/Floor Tiles.png")
 bg_frente = image.load("./Atividade-12/Assets/BG layer 1.png")
 bg_frente = transform.scale(bg_frente, (1696, 576))
 bg_fundo = image.load("./Atividade-12/Assets/BG layer 5.png")
